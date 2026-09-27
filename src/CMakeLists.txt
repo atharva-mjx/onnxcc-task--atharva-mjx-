@@ -2,6 +2,7 @@ configure_file(onnxcc/version.h.in onnxcc/version.h @ONLY)
 
 add_library(onnxcc_lib STATIC
     onnxcc/version.cpp
+    onnxcc/cli/parser.cpp
 )
 
 add_executable(onnxcc onnxcc/main.cpp)
@@ -20,6 +21,9 @@ target_include_directories(onnxcc_lib
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}
+    PRIVATE
+# cxxopts is vendored
+        ${CMAKE_SOURCE_DIR}/third_party/cxxopts
 )
 
 target_compile_options(onnxcc_lib PRIVATE ${ONNXCC_WARNINGS})
